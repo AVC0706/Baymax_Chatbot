@@ -1,8 +1,7 @@
-const express = require("express");
-const connectDB = require("./config/database.js");
-const cors = require("cors");
+const express = require('express');
+const connectDB = require('./config/database.js');
+const cors = require('cors');
 const app = express();
-
 
 //Database Connection
 connectDB();
@@ -19,10 +18,9 @@ app.use(cors());
 
 //----------Authentication--------------
 // app.use("/api/auth", require("./routes/auth"));
+app.use('/api/users', require('./routes/users'));
 
-
-
-// Serve static assets in production 
+// Serve static assets in production
 // if (process.env.NODE_ENV === "production") {
 //   // Set static folder
 //   app.use(express.static("client/build"));
@@ -34,4 +32,4 @@ app.use(cors());
 
 const PORT = process.env.PORT || 5000;
 
-app.listen(PORT, () => console.log("Server Started on 5000"));
+app.listen(PORT, () => console.log('Server Started on 5000'));
