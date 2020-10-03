@@ -1,0 +1,4 @@
+{
+  "mongoURI": "mongodb+srv://gatij:baymax2.0@baymax2.x0fdq.mongodb.net/gatij?retryWrites=true&w=majority",
+  "jwtSecret": "jwtSecret"
+}
