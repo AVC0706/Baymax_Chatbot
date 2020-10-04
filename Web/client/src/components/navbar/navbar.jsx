@@ -35,7 +35,8 @@ export default function NavBar() {
             <span class="material-icons" style={{fontSize:'3rem'}}>android</span>{" "}
           </IconButton>
           <Typography variant="h4" className={classes.title}>
-            BAYMAX
+          <Link to="/" style={{color:'white'}}>BAYMAX</Link>
+
           </Typography>
           <Button
             color="inherit"

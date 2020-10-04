@@ -10,6 +10,8 @@ intents:
 - mood_unhappy
 - bot_challenge
 - symptoms_joints
+entities:
+- sympt
 responses:
   utter_greet:
   - text: Hey! How are you?
