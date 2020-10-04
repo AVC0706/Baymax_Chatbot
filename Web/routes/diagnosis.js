@@ -1,15 +1,19 @@
 const express = require('express');
-const User = require('../models/User');
 const Symptoms = require('../models/Symptoms');
 const axios = require('axios');
+const Diagnosis = require('../models/Diagnosis');
+const { isAuth } = require('../middleware/auth');
 const router = express.Router();
+const config = require('config');
+
+const token = config.get('token');
 
 //Get symptoms from api
 router.get('/symptom', async (req, res) => {
   console.log('Get Symptoms');
   try {
     const symptoms = await axios.get(
-      'https://sandbox-healthservice.priaid.ch/symptoms?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6ImdhdGlqLnRhcmFuZWthckBnbWFpbC5jb20iLCJyb2xlIjoiVXNlciIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL3NpZCI6Ijc4NTUiLCJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3ZlcnNpb24iOiIyMDAiLCJodHRwOi8vZXhhbXBsZS5vcmcvY2xhaW1zL2xpbWl0IjoiOTk5OTk5OTk5IiwiaHR0cDovL2V4YW1wbGUub3JnL2NsYWltcy9tZW1iZXJzaGlwIjoiUHJlbWl1bSIsImh0dHA6Ly9leGFtcGxlLm9yZy9jbGFpbXMvbGFuZ3VhZ2UiOiJlbi1nYiIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvZXhwaXJhdGlvbiI6IjIwOTktMTItMzEiLCJodHRwOi8vZXhhbXBsZS5vcmcvY2xhaW1zL21lbWJlcnNoaXBzdGFydCI6IjIwMjAtMDktMjciLCJpc3MiOiJodHRwczovL3NhbmRib3gtYXV0aHNlcnZpY2UucHJpYWlkLmNoIiwiYXVkIjoiaHR0cHM6Ly9oZWFsdGhzZXJ2aWNlLnByaWFpZC5jaCIsImV4cCI6MTYwMTczODA4NSwibmJmIjoxNjAxNzMwODg1fQ.aE5FpX0UCpHzZYHy7XVExvK3TlZlzf7gw_ldF50UjVs&language=en-gb'
+      `https://sandbox-healthservice.priaid.ch/symptoms?token=${token}&language=en-gb`
     );
 
     console.log(symptoms.data);
@@ -18,6 +22,28 @@ router.get('/symptom', async (req, res) => {
     allSymptoms.save();
     res.json({ msg: 'Saved to database', data });
   } catch (err) {
+    console.log(err.message);
+    res.status(500).send('Server Error');
+  }
+});
+
+router.post('/diagnosis', isAuth, async (req, res) => {
+  console.log('Get Diagnosis');
+  const { symptomId, id, age, gender } = req.body;
+  console.log(req.body);
+
+  try {
+    const diagnosis = await axios.get(
+      `https://sandbox-healthservice.priaid.ch/diagnosis?token=${token}&language=en-gb&symptoms=[${symptomId}]&gender=${gender}&year_of_birth=${age}`
+    );
+    // const data = diagnosis.data
+    // const allDiagnosis = new Diagnosis({
+    //   userId,
+    //   diagnosis: data
+    // })
+    // allDiagnosis.save()
+    res.json({ msg: 'Diagnosed', data });
+  } catch (error) {
     console.log(err.message);
     res.status(500).send('Server Error');
   }
