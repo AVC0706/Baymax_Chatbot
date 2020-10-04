@@ -27,6 +27,9 @@ const userSchema = mongoose.Schema({
   healthissue: {
     type: String,
   },
+  details: {
+    type: Boolean,
+  },
 });
 
 module.exports = mongoose.model('user', userSchema);
