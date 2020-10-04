@@ -5,10 +5,10 @@ import './App.css';
 // import UserContext from "./context/user/userContext";
 
 import Routes from './routes';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import Login from './pages/login/login.page';
-import HealthForm from './pages/login/userHealthForm';
+import { BrowserRouter as Router } from 'react-router-dom';
 import UserContext from './context/UserContext';
+import NavBar  from './components/navbar/navbar';
+import Footer from './components/footer/footer';
 
 function App() {
   const userContext = useContext(UserContext);
@@ -22,10 +22,11 @@ function App() {
   return (
     <div>
       <Router>
-        {/* <Navbar /> */}
-
+        <NavBar/>
         <Routes />
       </Router>
+      <Footer/>
+
     </div>
   );
 }
