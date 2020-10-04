@@ -35,8 +35,9 @@
   - utter_greet
 * symptoms_joints
   - action-symptom-found
+* goodbye
+  - utter_goodbye
 
 ## symptom path 2
-
 * symptoms_joints
   - action-symptom-found  

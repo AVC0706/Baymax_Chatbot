@@ -24,7 +24,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Login = () => {
+const Login = (props) => {
   const classes = useStyles();
 
   const userContext = useContext(UserContext);
@@ -42,7 +42,8 @@ const Login = () => {
       const resdata = res.data;
       localStorage.setItem("token", resdata.token);
       userContext.loadUser();
-      console.log(resdata);
+      console.log(res.data.user)
+      props.history.push('/')
     });
   };
 
@@ -63,8 +64,8 @@ const Login = () => {
               direction="row"
               alignItems="center"
               justify="center">
-              <Grid item xs={12} style={{marginLeft:'17%', fontFamily:'Roboto'}}>
-                <h2>Hello, I am Baymax your personal healthcare assistant !!</h2>
+              <Grid item xs={12} style={{marginLeft:'39%', fontFamily:'Roboto'}}>
+                <h1>Login to Baymax !!</h1>
                 <br/>
               </Grid>
               <Grid item xs={8}>

@@ -35,7 +35,15 @@ class ActionSymptomFound(Action):
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
 
-        dispatcher.utter_message(text="You either have back pain or hip pain")
+        entities = tracker.latest_message['entities']
+        print(entities)
+        sympt=''
+        for e in entities:
+            if e['entity']=='sympt':
+                sympt=e['value']
+                print(sympt)
+
+        dispatcher.utter_message(text="You have " + sympt )
 
         return []
 
