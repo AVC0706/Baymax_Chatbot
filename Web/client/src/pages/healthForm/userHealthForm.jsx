@@ -79,53 +79,95 @@ const HealthForm = () => {
   return (
     <Container component='main' maxWidth='xs'>
       <CssBaseline />
-      <form onSubmit={onSubmit}>
-        <h2>Health Information</h2>
-        <label>Enter Age</label>
-        <input
-          type='text'
-          name='age'
-          value={age}
-          onChange={onChange}
-          required
-        ></input>
-        <label>Enter Height</label>
-        <input
-          type='text'
-          name='height'
-          value={height}
-          onChange={onChange}
-        ></input>
-        <label>Enter Height</label>
-        <input
-          type='text'
-          name='gender'
-          value={gender}
-          onChange={onChange}
-        ></input>
-        <label>Enter Weight</label>
-        <input
-          type='text'
-          name='weight'
-          value={weight}
-          onChange={onChange}
-        ></input>
-        <label>Enter Health Issues (if any)</label>
-        <input
-          type='text'
-          name='healthissue'
-          value={healthissue}
-          onChange={onChange}
-        ></input>
-        <label>Enter Allergies (if any)</label>
-        <input
-          type='text'
-          name='Allergies'
-          value={allergies}
-          onChange={onChange}
-        ></input>
-        <input type='submit'></input>
-      </form>
+
+      <div className={classes.paper}>
+        <form onSubmit={onSubmit} className={classes.form} noValidate>
+          <h2>Health Information</h2>
+
+          <TextField
+            variant='outlined'
+            margin='normal'
+            fullWidth
+            autoFocus
+            type='text'
+            name='age'
+            value={age}
+            onChange={onChange}
+            label='Enter Age'
+            required
+          ></TextField>
+
+          <TextField
+            variant='outlined'
+            margin='normal'
+            fullWidth
+            autoFocus
+            type='text'
+            name='height'
+            value={height}
+            label='Enter Height'
+            onChange={onChange}
+          ></TextField>
+
+          <TextField
+            variant='outlined'
+            margin='normal'
+            fullWidth
+            autoFocus
+            type='text'
+            name='gender'
+            value={gender}
+            label='Enter Gender'
+            onChange={onChange}
+          ></TextField>
+
+          <TextField
+            variant='outlined'
+            margin='normal'
+            fullWidth
+            autoFocus
+            type='text'
+            name='weight'
+            value={weight}
+            label='Enter Weight'
+            onChange={onChange}
+          ></TextField>
+
+          <TextField
+            variant='outlined'
+            margin='normal'
+            fullWidth
+            autoFocus
+            type='text'
+            name='healthissue'
+            value={healthissue}
+            label='Enter Health Issues (if any)'
+            onChange={onChange}
+          ></TextField>
+
+          <TextField
+            variant='outlined'
+            margin='normal'
+            fullWidth
+            autoFocus
+            type='text'
+            name='Allergies'
+            value={allergies}
+            label='Enter Allergies'
+            onChange={onChange}
+          ></TextField>
+
+          <Button
+            type='submit'
+            fullWidth
+            variant='contained'
+            color='primary'
+            className={classes.submit}
+          >
+            Submit
+          </Button>
+        </form>
+      </div>
     </Container>
   );
 };

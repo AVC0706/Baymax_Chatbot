@@ -29,19 +29,20 @@ router.get('/symptom', async (req, res) => {
 
 router.post('/diagnosis', isAuth, async (req, res) => {
   console.log('Get Diagnosis');
-  const { symptomId, id, age, gender } = req.body;
+  const { symptomId } = req.body;
+  const { id, age, gender } = req.user.body;
   console.log(req.body);
 
   try {
     const diagnosis = await axios.get(
       `https://sandbox-healthservice.priaid.ch/diagnosis?token=${token}&language=en-gb&symptoms=[${symptomId}]&gender=${gender}&year_of_birth=${age}`
     );
-    // const data = diagnosis.data
-    // const allDiagnosis = new Diagnosis({
-    //   userId,
-    //   diagnosis: data
-    // })
-    // allDiagnosis.save()
+    const data = diagnosis.data;
+    const allDiagnosis = new Diagnosis({
+      id,
+      diagnosis: data,
+    });
+    allDiagnosis.save();
     res.json({ msg: 'Diagnosed', data });
   } catch (error) {
     console.log(err.message);
