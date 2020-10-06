@@ -42,7 +42,7 @@ const Landing = (props) => {
               alignItems="center"
               justify="center">
               <Grid item xs={12} style={{marginLeft:'17%', fontFamily:'Roboto'}}>
-                <h2>Hello, I am Baymax your personal healthcare assistant !!</h2>
+                <h2>Hello, I am Bay-max your personal healthcare assistant !!</h2>
                 <br/>
               </Grid>
               <Grid item xs={12}>
